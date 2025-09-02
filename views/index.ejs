@@ -6,10 +6,16 @@
     body { font-family: Arial, sans-serif; margin: 40px; }
     input { padding: 8px; width: 250px; }
     button { padding: 8px 16px; margin-left: 10px; }
-    .result { margin-top: 20px; padding: 10px; border: 1px solid #ccc; border-radius: 6px; }
-    .good { color: green; }
-    .not-good { color: red; }
-    .neutral { color: orange; }
+    .result { 
+      margin-top: 20px; 
+      padding: 10px; 
+      border: 2px solid #ccc; 
+      border-radius: 6px; 
+    }
+    .good { border-color: green; }
+    .not-good { border-color: red; }
+    .neutral { border-color: orange; }
+    h3 span { font-weight: normal; }
   </style>
 </head>
 <body>
@@ -22,8 +28,11 @@
   <% if (results && results.length > 0) { %>
     <h2>Results</h2>
     <% results.forEach(r => { %>
-      <div class="result">
-        <h3><%= r.number %> - <span class="<%= r.status.toLowerCase().replace(' ', '-') %>"><%= r.status %></span></h3>
+      <div class="result 
+                  <%= r.status.toLowerCase().includes('not-good') ? 'not-good' : 
+                      r.status.toLowerCase().includes('good') ? 'good' : 
+                      'neutral' %>">
+        <h3><%= r.number %> - <span><%= r.status %></span></h3>
         <p><%= r.description %></p>
       </div>
     <% }) %>
